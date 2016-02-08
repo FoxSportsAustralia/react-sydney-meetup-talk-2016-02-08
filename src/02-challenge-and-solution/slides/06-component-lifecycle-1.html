@@ -1,0 +1,37 @@
+<section>
+    <h2>Who can you trust</h2>
+    <img height="300" class="fragment" src="assets/imgs/02-mosaic-desktop.png" />
+    <img height="300" class="fragment" src="assets/imgs/02-mosaic-tablet.png" />
+    <p class="fragment">video isn't playing...</p>
+    <p class="fragment"><code class="inline-code">event.isTrusted</code> is <code class="inline-code">false</code></p>
+
+    <aside class="notes" data-markdown>
+        <script type="text/template">
+            * Example React widget: video mosaic
+            * Desktop: clicking on a mosaic tile starts video player
+            * Not on mobile!
+            Restrictions on what type of events can trigger video playback
+            Event must originate from a user interaction - e.g. touch event.
+            * This event has a read-only property of isTrusted.
+            Each change to the video source field tears down, recreates and remounts videoJS.
+            Cannot start video on same thread.
+        </script>
+    </aside>
+</section>
+
+<section>
+    <h2>Some tweaking required...</h2>
+    <div class="fragment">
+        <p>Passing props via JSX not working</p>
+        <img src="assets/imgs/02-lifecycle.png" />
+    </div>
+
+    <aside class="notes" data-markdown>
+        <script type="text/template">
+            * Between setup and teardown, changes to state or props kick off the update lifecycle
+            * Updating our video player via props is not going to work
+        </script>
+    </aside>
+</section>
+
+

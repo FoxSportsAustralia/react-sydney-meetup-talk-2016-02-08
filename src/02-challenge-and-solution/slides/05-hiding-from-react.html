@@ -1,0 +1,62 @@
+<section>
+    <h2>Living dangerously</h2>
+    <div class="fragment">
+        <span style="color:red">dangerously</span>SetInnerHTML
+    </div>
+    <img class="fragment" src="assets/imgs/02-hide-from-react.png" />
+
+    <aside class="notes" data-markdown>
+        <script type="text/template">
+            We need to quarantine the part of the DOM videoJS is manipulating.
+            * Still want to mount and dismount as a component
+            * React can render markup directly into a container element
+            * dangerouslySetInnerHTML
+            * Create a placeholder div for React to bind to
+                * Pass markup as a string to dangerouslySetInnerHTML attribute
+                * Element's internal markup is a property of the React element
+                * Not a React element itself
+        </script>
+    </aside>
+</section>
+
+<section>
+    <h2>Problem solved</h2>
+    <div class="fragment">
+        <p>Video element is now inside a placeholder &lt;div&gt;</p>
+        <pre class="fragment"><code data-trim data-noescape>
+&lt;div data-reactid=".0.1"&gt;<!-- React Element. Placeholder div -->
+    &lt;!-- Markup supplied by <b>dangerouslySetInnerHTML</b>.
+        VideoJS is sandboxed in here and can destroy elements
+        without freaking React out --&gt;
+&lt;/div&gt;
+        </code></pre>
+    </div>
+    <div class="fragment">
+        <p>Finding the video tag &amp; mounting VJS</p>
+        <img src="assets/imgs/02-video-js-object.PNG" />
+    </div>
+
+    <aside class="notes" data-markdown>
+        <script type="text/template">
+            * Video player code is sandboxed inside a React element
+            * Markup is now considered an attribute of that div
+            * We can mount videoJS easily with a simple DOM query
+            * VideoJS can reorganise as much as it likes
+        </script>
+    </aside>
+</section>
+
+<section>
+    <h2>Problem solved... kinda</h2>
+    <p class="fragment">Unmanaged code = no invariant violations</p>
+    <p class="fragment">Unmanaged code = reconcillation with a sledgehammer</p>
+    <p class="fragment">Expensive VideoJS remount every prop update</p>
+
+    <aside class="notes" data-markdown>
+        <script type="text/template">
+            * No invariant violations
+            * BUT now <video> DOM is discarded and recreated
+            * VideoJS needs to be remounted on every change
+        </script>
+    </aside>
+</section>

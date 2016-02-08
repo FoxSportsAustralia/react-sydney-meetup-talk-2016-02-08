@@ -1,0 +1,49 @@
+<section>
+    <h4>Some things you can do with Bacon/FRP</h4>
+
+    <div class="fragment">
+<pre><code data-trim data-noescape style="font-size: 14px;">
+// Map specific Values
+let matchDetails = getMatchDetails(12345);
+
+let venueName = matchDetails
+    .map((matchDetails) => matchDetails.venueName); // ANZ Stadium
+
+let matchDate = matchDetails
+    .map((matchDetails) => moment(matchDetails.startDate).format('MMM Do YYYY') // Feb 8th 2016
+</code></pre>
+    </div>
+
+    <div class="fragment">
+<pre><code data-trim data-noescape style="font-size: 14px;">
+// Generate new streams, based on previous streams (new api end points for example)
+let matchDetails = getMatchDetails(12345);
+
+let teamA = matchDetails
+    .flatMapLatest((matchDetails) => getTeamDetails(matchDetails.team_a.id));
+
+let teamB = matchDetails
+    .flatMapLatest((matchDetails) => getTeamDetails(matchDetails.team_b.id));
+</code></pre>
+    </div>
+
+    <div class="fragment">
+<pre><code data-trim data-noescape style="font-size: 14px;">
+bacon.combineTemplate({
+    venueName,
+    matchDate,
+    teamA,
+    teamB
+}).onValue((data) => {
+    ReactDOM.render(&lt;Component ...data /&gt;, myElement);
+});
+</code></pre>
+    </div>
+
+    <aside class="notes">
+        <ul>
+            <li>Can Map data from API responses out to be more specific things your view needs.</li>
+            <li>Can generate new data end point streams, based off other streams being updated</li>
+        </ul>
+    </aside>
+</section>

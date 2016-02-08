@@ -1,0 +1,23 @@
+<section>
+    <h2>Huh? Invariant violation?</h2>
+    <p class="fragment">
+        <i>an <span class="inline-code">invariant</span> is a property which remains unchanged when a specified transformation is applied</i>
+    </p>
+    <p class="fragment">The DOM is React's invariant</p>
+    <ul>
+        <li class="fragment">Reconcilliation</li>
+        <li class="fragment">React is very possessive</li>
+        <li class="fragment"><code class="inline-code">ReactDOM.render()</code> - nobody else</li>
+        <li class="fragment">But videoJS needs to update the DOM...</li>
+    </ul>
+
+    <aside class="notes" data-markdown>
+        <script type="text/template">
+            An invariant has been violated. To the dictionary!
+            * So something changed which shouldn't have. Because....
+            * One of the core features of react is the virtual DOM and DOM diffing. This relies on React having exclusive control of its elements
+            * DOM elements mutates without React = react freaks out
+            * BUT this isn't always possible, for example when using other javascript libraries which need access to the DOM
+        </script>
+    </aside>
+</section>

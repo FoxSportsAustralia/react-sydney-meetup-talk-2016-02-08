@@ -1,0 +1,29 @@
+<section>
+    <h3>Our trusty Render Method</h3>
+    <pre><code data-trim data-noescape style="font-size: 14px;">
+if (this.element) {
+    ReactDOM.render(
+        &lt;WidgetComponent {...data.view} /&gt;,
+        this.element
+    );
+} else {
+    return renderToHtml(
+        &lt;WidgetComponent {...data.view} /&gt;,
+        'widget', // this.element
+        {
+            data: data.iso,
+            settings: this.settings
+        }
+    );
+}
+    </code></pre>
+
+    <aside class="notes">
+        <ul>
+            <li>We have an element (element on the page)</li>
+            <li>We have the initialData</li>
+            <li>Client re-renders the React component</li>
+            <li>Diff occurs and client picks up where server left off</li>
+        </ul>
+    </aside>
+</section>

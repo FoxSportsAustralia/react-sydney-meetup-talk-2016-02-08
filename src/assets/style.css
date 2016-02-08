@@ -1,0 +1,19 @@
+.blinking-text {
+    animation: blinker 1s linear infinite;
+    color: red;
+}
+
+@keyframes blinker {
+  0% { opacity: 0; }
+  49% { opacity: 0; }
+  50% { opacity: 1; }
+}
+
+.inline-code {
+    color: chocolate;
+}
+
+mark {
+    background: chocolate !important;
+}
+

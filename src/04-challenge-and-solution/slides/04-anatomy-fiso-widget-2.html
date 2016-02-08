@@ -1,0 +1,27 @@
+<section>
+    <h3>Server side boot</h3>
+    <pre><code data-trim data-noescape style="font-size: 14px;">
+function Widget(element, settings) { // our widget
+    this.element = element;
+    this.settings = settings;
+}
+
+let widget = new Widget(null, {});
+widget.<mark>initIso()</mark>;
+
+Widget.prototype.initIso = function () {
+    return new Promise((resolve) => {
+        this.<mark>getData()</mark>
+            .onValue((data) => {
+                resolve({ html: <mark>this.render(data)</mark> });
+            });
+    });
+};
+    </code></pre>
+
+    <aside class="notes">
+        <ul>
+            <li>Init ISO</li>
+        </ul>
+    </aside>
+</section>

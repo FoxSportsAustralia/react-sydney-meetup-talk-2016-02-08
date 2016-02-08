@@ -1,0 +1,62 @@
+<section>
+    <h2>VideoJS <img src="assets/imgs/02-videojs-logo.png" style="display: inline-block;margin: 0 10px" width="200" /></h2>
+    <ul>
+        <li class="fragment">Standard API &amp; player skinning</li>
+        <li class="fragment">Popular & open source</li>
+        <li class="fragment">Extensive plugin library</li>
+    </ul>
+
+    <aside class="notes" data-markdown>
+        <script type="text/template">
+            * Video is central to Fox Sports.
+            * VideoJS chosen because:
+                * Standard appearance and API for video across browsers
+                * Popular & open source
+                * Extensive plugin library - problems already solved
+        </script>
+    </aside>
+</section>
+
+<section>
+    <h2>HLS</h2>
+    <p class="fragment"><span class="inline-code">H</span>ttp <span class="inline-code">L</span>ive <span class="inline-code">S</span>treaming</p>
+    <ul>
+        <li class="fragment">live streaming</li>
+        <li class="fragment">variable bitrate</li>
+        <li class="fragment">widely supported*</li>
+    </ul>
+    <div class="fragment">
+        <p>
+            <i>*not universally</i>
+        </p>
+        <p>
+            <img src="assets/imgs/02-state-of-hls-support-20160702.png" />
+        </p>
+    </div>
+
+    <aside class="notes" data-markdown>
+        <script type="text/template">
+            * Our preferred video format is HLS
+            * Live streams
+            * Variable bitrate based on bandwidth
+            * Widely supported
+            * Not supported on all our targeted browsers
+        </script>
+    </aside>
+</section>
+
+<section>
+    <h2>VideoJS HLS Polyfill</h2>
+    <h3>How does it work?</h3>
+    <p class="fragment">Mount VideoJS on a <code class="inline-code">&lt;video&gt;</code> element</p>
+    <p class="fragment">If native player HLS not supported, polyfill support by replacing <code class="inline-code">&lt;video&gt;</code> with flashy <code class="inline-code">&lt;object&gt;</code></p>
+    <img class="fragment" src="assets/imgs/02-hls-chart.png" />
+
+    <aside class="notes" data-markdown>
+        <script type="text/template">
+            * HLS support is provided by a polyfill
+            * Where HLS is supported, then a HTML5 video player is used for native browser playback
+            * Where HLS is not supported, a flash player is used for playback.
+        </script>
+    </aside>
+</section>

@@ -1,0 +1,20 @@
+<section>
+    <h3>Client side boot</h3>
+    <pre><code data-trim data-noescape style="font-size: 14px;">
+let widget = new Widget(<mark>'widget'</mark>, {});
+widget.<mark>init(initialData)</mark>;
+
+Widget.prototype.init = function (initialData) {
+    this.<mark>getData(initialData)</mark>
+        .onValue(this.render.bind(this));
+};
+    </code></pre>
+
+    <aside class="notes">
+        <ul>
+            <li>We have an element on the page</li>
+            <li>We have the initialData</li>
+            <li>Time for the client to render the React component</li>
+        </ul>
+    </aside>
+</section>

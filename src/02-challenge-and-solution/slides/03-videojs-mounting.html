@@ -1,0 +1,76 @@
+<section>
+    <h2>React mounting onto the DOM</h2>
+    <p class="fragment">JSX <code class="inline-code">&lt;video&gt;</code> object</p>
+    <pre class="fragment"><code data-trim data-noescape>
+&lt;video
+    controls
+    class={classNames}
+    autoplay={this.props.videoJsSettings}
+    preload={this.props.videoJsSettings.preload}
+    poster={this.props.videoJsSettings.poster}&gt;
+    {this.props.videoSources.reduce(this.getSourceStrings)}
+&lt;/video&gt;
+    </code></pre>
+
+    <p class="fragment">Renders to</p>
+    <pre  class="fragment"><code data-trim data-noescape>
+&lt;video
+    class="vjs-tech"
+    preload="none"
+    poster="416773_640x360.jpg"&gt;
+    &lt;source src=... type="application/x-mpegURL"&gt;
+    &lt;source src=... type="video/mp4"&gt;
+&lt;/video&gt;
+    </code></pre>
+
+    <aside class="notes" data-markdown>
+        <script type="text/template">
+            * VideoJS wants a vanilla HTML5 video element
+            * So we create that with JSX like so
+            * Tada: video tag
+        </script>
+    </aside>
+</section>
+
+
+<section>
+    <h2>VideoJS mounting onto &lt;video&gt;</h2>
+    <p class="fragment">Original &lt;video&gt; element on the DOM</p>
+    <pre  class="fragment"><code data-trim data-noescape>
+&lt;video
+    class="video-js ..."
+    preload="none"
+    poster="416773_640x360.jpg"&gt;
+    &lt;source src=... type="application/x-mpegURL"&gt;
+    &lt;source src=... type="video/mp4"&gt;
+&lt;/video&gt;
+    </code></pre>
+    <p class="fragment">Updated DOM structure</p>
+    <pre class="fragment"><code data-trim data-noescape>
+&lt;div
+    poster="416773_640x360.jpg"
+    preload="none"
+    class="video-js ..."&gt;
+    &lt;object
+        type="application/x-shockwave-flash"
+        data=...&gt;
+        &lt;param name="movie" ...&gt;
+        &lt;param name="flashvars" ... /&gt;
+        &lt;!-- etc etc --&gt;
+    &lt;/object&gt;
+&lt;div&gt;
+    </code></pre>
+    <p class="fragment">
+        <span><code class="inline-code">&lt;div&gt;</code> wrapper</span><br/>
+        <span><code class="inline-code">&lt;video&gt;</code> replaced by <code class="inline-code">&lt;object&gt;</code></span>
+    </p>
+    <p class="blinking-text fragment">invariant violation</p>
+
+    <aside class="notes" data-markdown>
+        <script type="text/template">
+            * VideoJS takes control of the `<video>` element
+            * Adds a wrapper, replaces HTML5 with flash for polyfill
+            * Oh no!
+        </script>
+    </aside>
+</section>

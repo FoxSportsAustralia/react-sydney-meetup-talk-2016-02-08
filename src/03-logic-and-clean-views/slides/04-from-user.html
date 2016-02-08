@@ -1,0 +1,33 @@
+<section>
+    <h4>... and some user interactions</h4>
+
+    <div class="fragment">
+<pre><code data-trim data-noescape style="font-size: 14px;">
+// Dealing with User Input
+let userSelectedIdBus = new Bacon.bus();
+let selectedId = userSelectedIdBus
+    .map((userClickDetails) => userClickDetails.newId)
+    .startWith(1); // starting id of 1, before the user clicks.
+
+let matchDetails = selectedId
+    .flatMapLatest((selectedId) => {
+        return getMatchDetails(selectedId);
+    });
+
+bacon.combineTemplate({
+    matchDetails,
+    onSelectId: (details) => { userSelectedIdBus.push(details); }
+}).onValue((data) => {
+    ReactDOM.render(&lt;Component ...data /&gt;, myElement);
+});
+</code></pre>
+    </div>
+
+    <aside class="notes">
+        <ul>
+            <li>define our logic of switching matches in the same place we define them</li>
+            <li>Cleans up views from handle operations</li>
+            <li>Allows us to change different streams through the bus, reusing the same select component</li>
+        </ul>
+    </aside>
+</section>

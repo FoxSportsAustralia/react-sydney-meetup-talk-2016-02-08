@@ -1,0 +1,24 @@
+<section>
+    <h3>render To Html</h3>
+    <pre><code data-trim data-noescape style="font-size: 14px;">
+exports.toHtml = function toHtml(jsxComponent, tagName, fisoBootArguments) {
+    var unqiueId  = cuid();
+    var reactHtml = ReactDOMServer.renderToStaticMarkup(jsxComponent);
+
+    return `&lt;div id="${unqiueId}"&gt;${reactHtml}&lt;/div&gt;
+    &lt;script&gt;
+      window.fisoBoot = window.fisoBoot || {};
+      window.fisoBoot['${tagName}'] = window.fisoBoot['${tagName}'] || {};
+      window.fisoBoot['${tagName}']['${unqiueId}'] = ${JSON.stringify(fisoBootArguments)};
+    &lt;/script&gt;`;
+};
+    </code></pre>
+
+    <aside class="notes">
+        <ul>
+            <li>Renders the react component's html</li>
+            <li>Renders the settings</li>
+            <li>Renders the initialData</li>
+        </ul>
+    </aside>
+</section>

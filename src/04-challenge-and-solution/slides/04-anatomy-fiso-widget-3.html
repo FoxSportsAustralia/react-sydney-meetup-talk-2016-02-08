@@ -1,0 +1,29 @@
+<section>
+    <h3>Get the data</h3>
+    <pre><code data-trim data-noescape style="font-size: 14px;">
+Widget.prototype.getData = function (initialData = false) {
+    let posts = initalLaterOr(
+        initialData && initialData.posts,
+        this.getWidgetStream()
+    ); // initialData doesn't exist yet so we fetch the stream
+
+    return bacon.combineTemplate({
+        <mark>view</mark>: bacon.combineTemplate({
+            posts,
+            footerText : this.settings.footerText,
+            carousel   : this.settings.carousel
+        }),
+        <mark>iso</mark>: bacon.combineTemplate({
+            posts
+        })
+    });
+};
+    </code></pre>
+
+    <aside class="notes">
+        <ul>
+            <li>Check for data being passed through the init, and if not get it</li>
+            <li>Take note of view and iso built in the object</li>
+        </ul>
+    </aside>
+</section>

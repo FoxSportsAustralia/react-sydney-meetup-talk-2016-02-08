@@ -1,0 +1,24 @@
+<section>
+    <h3>Render the component</h3>
+    <pre><code data-trim data-noescape style="font-size: 14px;">
+Widget.prototype.render = function (data) {
+    return <mark>renderToHtml</mark>(
+        &lt;WidgetComponent {<mark>...data.view</mark>} /&gt;,
+        'misc-widget',
+        {
+            data: <mark>data.iso</mark>,
+            settings: this.settings
+        }
+    );
+};
+    </code></pre>
+
+    <aside class="notes">
+        <ul>
+            <li>data.view is the full payload containing settings business logic</li>
+            <li>data.iso is what is printed on the DOM</li>
+            <li>we request output of react componnent</li>
+            <li>deliver it to the DOM with settings and data to be picked up by the client</li>
+        </ul>
+    </aside>
+</section>

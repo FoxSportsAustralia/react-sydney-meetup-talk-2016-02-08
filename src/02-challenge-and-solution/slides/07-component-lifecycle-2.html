@@ -1,0 +1,20 @@
+<section>
+    <h2>The component lifecycle</h2>
+    <p>shouldComponentUpdate</p>
+    <img class="fragment" src="assets/imgs/02-lifecycle-alt.png" />
+    <img class="fragment" src="assets/imgs/02-videojs-lifecycle.png" />
+
+    <aside class="notes" data-markdown>
+        <script type="text/template">
+            * Interesting function is shouldComponentUpdate()
+            * By default, always returns true.
+            * Updated props or state should normally be checked to see if they result in DOM changes
+            * By returning false then React will never even try to update this component
+            * Props can be intercepted, and updates to VideoJS can now be done wholly through its API.
+            * Effectively, videoJS now manages the update lifecycle
+            * Placeholder div remains in place for when the element needs teardown
+        </script>
+    </aside>
+</section>
+
+

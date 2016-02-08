@@ -1,0 +1,43 @@
+<section>
+    <h4>Composing Views</h4>
+
+    <div class="fragment">
+<pre><code data-trim data-noescape style="font-size: 14px;">
+function getMosaicDataStream() {
+    return bacon.combineTemplate({ videos: getVideosFromCategory(123) });
+}
+
+let mosaicComponent = getMosaicDataStream()
+    .map((data) => &lt;MosaicComponent ...data&gt;);
+
+let filterComponent = getFilterStream()
+    .map((data) => &lt;HubComponent ...data&gt;);
+
+bacon.combineTemplate({mosaicComponent, filterComponent})
+    .onValue((data) => {
+        ReactDOM.render(&lt;Component ...data /&gt;, myElement);
+    });
+</code></pre>
+    </div>
+
+    <div class="fragment">
+<pre><code data-trim data-noescape style="font-size: 14px;">
+class HubComponent extends React.Component {
+    render: {
+        return (
+            &lt;div&gt;
+                {this.props.mosaicComponent}
+                {this.props.filterComponent}
+            &lt;/div&gt;
+        );
+    }
+}
+</pre></code>
+    </div>
+
+    <aside class="notes">
+        <ul>
+            <li>real power of react and streams - pre created react elements</li>
+        </ul>
+    </aside>
+</section>

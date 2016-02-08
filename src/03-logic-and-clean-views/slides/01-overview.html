@@ -1,0 +1,47 @@
+<section>
+    <h4>How we deal with complex datasets for React</h4>
+    <p><a href="https://baconjs.github.io">https://baconjs.github.io</a></p>
+
+    <div class="fragment">
+<pre><code data-trim data-noescape style="font-size: 14px;">
+request.get('match-details/' + matchId)
+    .end((err, matchDetails) => {
+        request.get('team-details' + matchDetails.fixtureId)
+            .end((err, teamDetails) => {
+                ReactDOM.render(
+                    &lt;Component match={matchDetails} team={teamDetails} /&gt;,
+                    document.getElementById('mount-id')
+                );
+            });
+    });
+</code></pre>
+    </div>
+
+    <div class="fragment">
+<pre><code data-trim data-noescape style="font-size: 14px;">
+let matchDetailsStream = getMatchDetails(matchId);
+
+let teamDetailsStream = matchDetailsStream
+    .flatMapLatest((matchDetails) => getTeamsDetails(matchDetails.fixtureId));
+
+let viewProps = bacon.combineTemplate({
+    matchDetails: matchDetailsStream,
+    teamDetails: teamDetailsStream
+}).onValue((data) => {
+    ReactDOM.render(&gt;Component ...data /&lt;, document.getElementById('mount-id'));
+});
+</code></pre>
+    </div>
+
+    <aside class="notes">
+        <ul>
+            <li>Complex Views handled by React now</li>
+            <li>Match the simplicity of React's DOM diffs to our data fetching</li>
+            <li>Bacon small Functional Reactive Programming Lib</li>
+            <li></li>
+            <li>From -> To</li>
+            <li></li>
+            <li>Much more linear, no callback hell, don't need to manage or keep track of them</li>
+        </ul>
+    </aside>
+</section>
